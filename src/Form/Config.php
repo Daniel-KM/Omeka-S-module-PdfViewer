@@ -15,7 +15,7 @@ class Config extends Form
             'object_iframe' => 'Object + iframe (max compatibility)', // @translate
         ];
         $this->add([
-            'name' => 'documentviewer_pdf_mode',
+            'name' => 'document_viewer_pdf_mode',
             'type' => 'Select',
             'options' => [
                 'label' => 'Integration mode', // @translate
@@ -29,7 +29,7 @@ class Config extends Form
         ]);
 
         $this->add([
-            'name' => 'documentviewer_pdf_style',
+            'name' => 'document_viewer_pdf_style',
             'type' => 'Text',
             'options' => [
                 'label' => 'Inline style', // @translate

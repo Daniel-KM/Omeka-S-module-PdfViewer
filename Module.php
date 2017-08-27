@@ -42,13 +42,13 @@ use Zend\View\Renderer\PhpRenderer;
 class Module extends AbstractModule
 {
     protected $settings = [
-        'documentviewer_pdf_mode' => 'object',
-        'documentviewer_pdf_style' => 'height: 600px;',
+        'document_viewer_pdf_mode' => 'object',
+        'document_viewer_pdf_style' => 'height: 600px;',
     ];
 
     protected $siteSettings = [
-        'documentviewer_pdf_mode' => 'object',
-        'documentviewer_pdf_style' => 'height: 600px;',
+        'document_viewer_pdf_mode' => 'object',
+        'document_viewer_pdf_style' => 'height: 600px;',
     ];
 
     public function getConfig()
@@ -147,7 +147,7 @@ class Module extends AbstractModule
         $siteSettings = $services->get('Omeka\Settings\Site');
         $form = $event->getTarget();
 
-        $fieldset = new Fieldset('pdf_viewer');
+        $fieldset = new Fieldset('document_viewer');
         $fieldset->setLabel('Document Viewer');
 
         $valueOptions = [
@@ -158,7 +158,7 @@ class Module extends AbstractModule
             'object_iframe' => 'Object + iframe (max compatibility)', // @translate
         ];
         $fieldset->add([
-            'name' => 'documentviewer_pdf_mode',
+            'name' => 'document_viewer_pdf_mode',
             'type' => 'Select',
             'options' => [
                 'label' => 'Integration mode', // @translate
@@ -167,15 +167,15 @@ class Module extends AbstractModule
             ],
             'attributes' => [
                 'value' => $siteSettings->get(
-                    'documentviewer_pdf_mode',
-                    $this->siteSettings['documentviewer_pdf_mode']
+                    'document_viewer_pdf_mode',
+                    $this->siteSettings['document_viewer_pdf_mode']
                 ),
                 // 'required' => 'true',
             ],
         ]);
 
         $fieldset->add([
-            'name' => 'documentviewer_pdf_style',
+            'name' => 'document_viewer_pdf_style',
             'type' => 'Text',
             'options' => [
                 'label' => 'Inline style', // @translate
@@ -184,8 +184,8 @@ class Module extends AbstractModule
             ],
             'attributes' => [
                 'value' => $siteSettings->get(
-                    'documentviewer_pdf_style',
-                    $this->siteSettings['documentviewer_pdf_style']
+                    'document_viewer_pdf_style',
+                    $this->siteSettings['document_viewer_pdf_style']
                 ),
             ],
         ]);
