@@ -8,7 +8,7 @@ class Config extends Form
     public function init()
     {
         $valueOptions = [
-            'inline' => 'Inline (easy customizable)', // @translate
+            'inline' => 'Inline (easily customizable)', // @translate
             'object' => 'Object', // @translate
             'embed' => 'Embed', // @translate
             'iframe' => 'Inline frame', // @translate
