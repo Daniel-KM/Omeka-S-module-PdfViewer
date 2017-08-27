@@ -1,0 +1,5 @@
+.php_cs.cache
+node_modules
+debug.log
+composer.lock
+/vendor
