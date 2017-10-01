@@ -47,7 +47,7 @@ class Module extends AbstractModule
     ];
 
     protected $siteSettings = [
-        'document_viewer_pdf_mode' => 'object',
+        'document_viewer_pdf_mode' => 'inline',
         'document_viewer_pdf_style' => 'height: 600px;',
     ];
 
