@@ -3,7 +3,6 @@
 namespace DocumentViewer\Service\Media\FileRenderer;
 
 use Interop\Container\ContainerInterface;
-use Omeka\Module\Manager as ModuleManager;
 use DocumentViewer\Media\FileRenderer\Pdf;
 use Zend\ServiceManager\Factory\FactoryInterface;
 

@@ -31,4 +31,14 @@ return [
             ],
         ],
     ],
+    'documentviewer' => [
+        'settings' => [
+            'documentviewer_pdf_mode' => 'object',
+            'documentviewer_pdf_style' => 'height: 600px;',
+        ],
+        'site_settings' => [
+            'documentviewer_pdf_mode' => 'inline',
+            'documentviewer_pdf_style' => 'height: 600px;',
+        ],
+    ],
 ];

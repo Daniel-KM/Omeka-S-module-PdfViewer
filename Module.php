@@ -41,16 +41,6 @@ use Zend\View\Renderer\PhpRenderer;
 
 class Module extends AbstractModule
 {
-    protected $settings = [
-        'document_viewer_pdf_mode' => 'object',
-        'document_viewer_pdf_style' => 'height: 600px;',
-    ];
-
-    protected $siteSettings = [
-        'document_viewer_pdf_mode' => 'inline',
-        'document_viewer_pdf_style' => 'height: 600px;',
-    ];
-
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
@@ -58,8 +48,6 @@ class Module extends AbstractModule
 
     public function install(ServiceLocatorInterface $serviceLocator)
     {
-        $settings = $serviceLocator->get('Omeka\Settings');
-        $siteSettings = $serviceLocator->get('Omeka\Settings\Site');
         $api = $serviceLocator->get('Omeka\ApiManager');
         $t = $serviceLocator->get('MvcTranslator');
 
@@ -70,55 +58,92 @@ class Module extends AbstractModule
                     . ' ' . $t->translate('See module’s installation documentation.')); // @translate
         }
 
-        foreach ($this->settings as $name => $value) {
-            $settings->set($name, $value);
-        }
-
-        $sites = $api->search('sites')->getContent();
-        foreach ($sites as $site) {
-            $siteSettings->setTargetId($site->id());
-            foreach ($this->siteSettings as $name => $value) {
-                $siteSettings->set($name, $value);
-            }
-        }
+        $this->manageSettings($serviceLocator->get('Omeka\Settings'), 'install');
+        $this->manageSiteSettings($serviceLocator, 'install');
     }
 
     public function uninstall(ServiceLocatorInterface $serviceLocator)
     {
-        $settings = $serviceLocator->get('Omeka\Settings');
+        $this->manageSettings($serviceLocator->get('Omeka\Settings'), 'uninstall');
+        $this->manageSiteSettings($serviceLocator, 'uninstall');
+    }
+
+    public function upgrade($oldVersion, $newVersion, ServiceLocatorInterface $serviceLocator)
+    {
+        if (version_compare($oldVersion, '3.0.1', '<')) {
+            $settings = $serviceLocator->get('Omeka\Settings');
+            $config = include __DIR__ . '/config/module.config.php';
+            foreach ($config[strtolower(__NAMESPACE__)]['settings'] as $name => $value) {
+                $oldName = str_replace('documentviewer_', 'document_viewer_', $name);
+                $settings->set($name, $settings->get($oldName, $value));
+                $settings->delete($oldName);
+            }
+
+            $settings = $serviceLocator->get('Omeka\Settings\Site');
+            $api = $serviceLocator->get('Omeka\ApiManager');
+            $sites = $api->search('sites')->getContent();
+            foreach ($sites as $site) {
+                $settings->setTargetId($site->id());
+                foreach ($config[strtolower(__NAMESPACE__)]['site_settings'] as $name => $value) {
+                    $oldName = str_replace('documentviewer_', 'document_viewer_', $name);
+                    $settings->set($name, $settings->get($oldName, $value));
+                    $settings->delete($oldName);
+                }
+            }
+        }
+    }
+
+    protected function manageSettings($settings, $process, $key = 'settings')
+    {
+        $config = require __DIR__ . '/config/module.config.php';
+        $defaultSettings = $config[strtolower(__NAMESPACE__)][$key];
+        foreach ($defaultSettings as $name => $value) {
+            switch ($process) {
+                case 'install':
+                    $settings->set($name, $value);
+                    break;
+                case 'uninstall':
+                    $settings->delete($name);
+                    break;
+            }
+        }
+    }
+
+    protected function manageSiteSettings(ServiceLocatorInterface $serviceLocator, $process)
+    {
         $siteSettings = $serviceLocator->get('Omeka\Settings\Site');
         $api = $serviceLocator->get('Omeka\ApiManager');
-
-        foreach ($this->settings as $name => $value) {
-            $settings->delete($name);
-        }
-
         $sites = $api->search('sites')->getContent();
         foreach ($sites as $site) {
             $siteSettings->setTargetId($site->id());
-            foreach ($this->siteSettings as $name => $value) {
-                $siteSettings->delete($name);
-            }
+            $this->manageSettings($siteSettings, $process, 'site_settings');
         }
     }
 
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
     {
         $sharedEventManager->attach(
-            'Omeka\Form\SiteSettingsForm',
+            \Omeka\Form\SiteSettingsForm::class,
             'form.add_elements',
             [$this, 'addSiteSettingsFormElements']
+        );
+        $sharedEventManager->attach(
+            \Omeka\Form\SiteSettingsForm::class,
+            'form.add_input_filters',
+            [$this, 'addSiteSettingsFilters']
         );
     }
 
     public function getConfigForm(PhpRenderer $renderer)
     {
         $services = $this->getServiceLocator();
+        $config = $services->get('Config');
         $settings = $services->get('Omeka\Settings');
         $formElementManager = $services->get('FormElementManager');
 
         $data = [];
-        foreach ($this->settings as $name => $value) {
+        $defaultSettings = $config[strtolower(__NAMESPACE__)]['settings'];
+        foreach ($defaultSettings as $name => $value) {
             $data[$name] = $settings->get($name);
         }
 
@@ -131,11 +156,24 @@ class Module extends AbstractModule
 
     public function handleConfigForm(AbstractController $controller)
     {
-        $settings = $this->getServiceLocator()->get('Omeka\Settings');
+        $services = $this->getServiceLocator();
+        $config = $services->get('Config');
+        $settings = $services->get('Omeka\Settings');
 
         $params = $controller->getRequest()->getPost();
+
+        $form = $this->getServiceLocator()->get('FormElementManager')
+            ->get(ConfigForm::class);
+        $form->init();
+        $form->setData($params);
+        if (!$form->isValid()) {
+            $controller->messenger()->addErrors($form->getMessages());
+            return false;
+        }
+
+        $defaultSettings = $config[strtolower(__NAMESPACE__)]['settings'];
         foreach ($params as $name => $value) {
-            if (isset($this->settings[$name])) {
+            if (isset($defaultSettings[$name])) {
                 $settings->set($name, $value);
             }
         }
@@ -145,7 +183,10 @@ class Module extends AbstractModule
     {
         $services = $this->getServiceLocator();
         $siteSettings = $services->get('Omeka\Settings\Site');
+        $config = $services->get('Config');
         $form = $event->getTarget();
+
+        $defaultSiteSettings = $config[strtolower(__NAMESPACE__)]['site_settings'];
 
         $fieldset = new Fieldset('document_viewer');
         $fieldset->setLabel('Document Viewer');
@@ -158,7 +199,7 @@ class Module extends AbstractModule
             'object_iframe' => 'Object + iframe (max compatibility)', // @translate
         ];
         $fieldset->add([
-            'name' => 'document_viewer_pdf_mode',
+            'name' => 'documentviewer_pdf_mode',
             'type' => 'Select',
             'options' => [
                 'label' => 'Integration mode', // @translate
@@ -167,15 +208,15 @@ class Module extends AbstractModule
             ],
             'attributes' => [
                 'value' => $siteSettings->get(
-                    'document_viewer_pdf_mode',
-                    $this->siteSettings['document_viewer_pdf_mode']
+                    'documentviewer_pdf_mode',
+                    $defaultSiteSettings['documentviewer_pdf_mode']
                 ),
                 // 'required' => 'true',
             ],
         ]);
 
         $fieldset->add([
-            'name' => 'document_viewer_pdf_style',
+            'name' => 'documentviewer_pdf_style',
             'type' => 'Text',
             'options' => [
                 'label' => 'Inline style', // @translate
@@ -184,12 +225,21 @@ class Module extends AbstractModule
             ],
             'attributes' => [
                 'value' => $siteSettings->get(
-                    'document_viewer_pdf_style',
-                    $this->siteSettings['document_viewer_pdf_style']
+                    'documentviewer_pdf_style',
+                    $defaultSiteSettings['documentviewer_pdf_style']
                 ),
             ],
         ]);
 
         $form->add($fieldset);
+    }
+
+    public function addSiteSettingsFilters(Event $event)
+    {
+        $inputFilter = $event->getParam('inputFilter');
+        $inputFilter->get('document_viewer')->add([
+            'name' => 'documentviewer_pdf_mode',
+            'required' => true,
+        ]);
     }
 }

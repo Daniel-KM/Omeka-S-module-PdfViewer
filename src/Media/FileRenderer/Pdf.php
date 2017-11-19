@@ -45,23 +45,23 @@ class Pdf implements RendererInterface
         $isSite = $view->params()->fromRoute('__SITE__');
         // For admin board.
         if (empty($isSite)) {
-            $mode = $view->setting('document_viewer_pdf_mode', $this->defaultOptions['mode']);
+            $mode = $view->setting('documentviewer_pdf_mode', $this->defaultOptions['mode']);
             $attributes = $this->defaultOptions['attributes'];
-            $style = $view->setting('document_viewer_pdf_style', $this->defaultOptions['style']);
+            $style = $view->setting('documentviewer_pdf_style', $this->defaultOptions['style']);
         }
         // For sites.
         else {
             $mode = isset($options['mode'])
                 ? $options['mode']
-                : $view->siteSetting('document_viewer_pdf_mode', $this->defaultOptions['mode']);
+                : $view->siteSetting('documentviewer_pdf_mode', $this->defaultOptions['mode']);
 
             $attributes = isset($options['attributes'])
                 ? $options['attributes']
-                : $view->siteSetting('document_viewer_pdf_attributes', $this->defaultOptions['attributes']);
+                : $view->siteSetting('documentviewer_pdf_attributes', $this->defaultOptions['attributes']);
 
             $style = isset($options['style'])
                 ? $options['style']
-                : $view->siteSetting('document_viewer_pdf_style', $this->defaultOptions['style']);
+                : $view->siteSetting('documentviewer_pdf_style', $this->defaultOptions['style']);
         }
 
         if (!empty($style)) {
@@ -104,7 +104,7 @@ class Pdf implements RendererInterface
         }
     }
 
-// universal viewer asset path
+    // universal viewer asset path
 //
 
     protected function fallback($media)
