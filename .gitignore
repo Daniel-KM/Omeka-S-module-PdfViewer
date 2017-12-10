@@ -1,5 +1,7 @@
-.php_cs.cache
-node_modules
-debug.log
-composer.lock
+;/asset/vendor/pdfjs
+/build
+/node_modules
 /vendor
+.DS_Store
+.php_cs.cache
+debug.log

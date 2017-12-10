@@ -44,6 +44,10 @@ from the root of the module, the first time:
 
 ```
     npm install
+    cd node_modules/pdf.js
+    npm install
+    gulp dist
+    cd ../..
     gulp
 ```
 
@@ -51,6 +55,10 @@ The next times:
 
 ```
     npm update
+    cd node_modules/pdf.js
+    npm update
+    gulp dist
+    cd ../..
     gulp
 ```
 
