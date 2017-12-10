@@ -74,7 +74,7 @@ class Pdf implements RendererInterface
                     'media' => $media,
                     'attributes' => $attributes,
                 ];
-                return $view->partial('common/pdf-viewer.phtml', $values);
+                return $view->partial('common/pdf-viewer', $values);
 
             case 'object':
                 $url = $view->escapeHtml($media->originalUrl());
