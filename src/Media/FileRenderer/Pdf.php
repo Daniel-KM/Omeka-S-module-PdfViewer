@@ -17,7 +17,7 @@ class Pdf implements RendererInterface
     protected $defaultOptions = [
         'mode' => 'inline',
         'attributes' => 'allowfullscreen="1"',
-        'style' => 'height: 600px;',
+        'style' => 'height: 600px; 70vh',
     ];
 
     /**
@@ -64,54 +64,46 @@ class Pdf implements RendererInterface
                 : $view->siteSetting('documentviewer_pdf_style', $this->defaultOptions['style']);
         }
 
-        if (!empty($style)) {
-            $attributes .= ' style="' . $view->escapeHtml($style) . '"';
-        }
-
         switch ($mode) {
             case 'inline':
-                $values = [
+                return $view->partial('common/pdf-viewer-inline', [
                     'media' => $media,
                     'attributes' => $attributes,
-                ];
-                return $view->partial('common/pdf-viewer-inline', $values);
+                    'style' => $style,
+                ]);
 
             case 'object':
-                $url = $view->escapeHtml($media->originalUrl());
-                return '<object height="100%" width="100%" ' . $attributes . ' data="'. $url . '" type="application/pdf">'
-                    . $this->fallback($media)
-                    . '</object>';
+                $html = '<object height="100%%" width="100%%" %1$s%2$s data="%3$s" type="application/pdf">%4$s</object>';
+                break;
 
             case 'embed':
-                $url = $view->escapeHtml($media->originalUrl());
-                return '<embed height="100%" width="100%" ' . $attributes . ' src="'. $url . '" type="application/pdf" />';
+                $html = '<embed height="100%%" width="100%%" %1$s%2$s src="%3$s" type="application/pdf" />';
+                break;
 
             case 'iframe':
-                $url = $view->escapeHtml($media->originalUrl());
-                return '<iframe height="100%" width="100%" ' . $attributes . ' src="' . $url . '">'
-                    . $this->fallback($media)
-                    . '</iframe>';
+                $html = '<iframe height="100%%" width="100%%" %1$s%2$s src="%3$s">%4$s</iframe>';
+                break;
 
             case 'object_iframe':
-                $url = $view->escapeHtml($media->originalUrl());
-                return '<object height="100%" width="100%" ' . $attributes . ' data="'. $url . '" type="application/pdf">'
-                    . '<iframe height="100%" width="100%" ' . $attributes . ' src="' . $url . '">'
-                    . $this->fallback($media)
-                    . '</iframe></object>';
+                $html = '<object height="100%%" width="100%%" %1$s%2$s data="%3$s" type="application/pdf">'
+                    . '<iframe height="100%%" width="100%%" %1$s%2$s src="%3$s">%4$s</iframe>'
+                    . '</object>';
+                break;
 
             default:
                 return new Message('The mode "%s" is not managed by the pdf viewer.', $mode); // @translate
         }
+        return vsprintf($html, [$attributes, $style ? ' style="' . $style . '"' : '', $media->originalUrl(), $this->fallback($media)]);
     }
 
     protected function fallback($media)
     {
         $view = $this->getView();
-        $text = $view->translate('This browser does not support PDF.')
+        $text = $view->escapeHtml($view->translate('This browser does not support PDF.'))
             . ' ' . sprintf($view->translate('You may %sdownload it%s to view it offline.'), // @translate
-                '<a href="' . $view->escapeHtml($media->originalUrl()) . '">', '</a>');
+                '<a href="' . $media->originalUrl() . '">', '</a>');
         $html = '<p>' . $text . '</p>'
-            . '<img src="' . $view->escapeHtml($media->thumbnailUrl('large')) . '" height="600px" />';
+            . '<img src="' . $media->thumbnailUrl('large') . '" height="600px" />';
         return $html;
     }
 

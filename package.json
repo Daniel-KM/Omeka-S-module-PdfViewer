@@ -28,7 +28,10 @@
   "devDependencies": {
     "async": "^2.6.0",
     "del": "^3.0.0",
-    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0"
+    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-string-replace": "^0.4.0"
   },
   "dependencies": {
     "pdf.js": "git+https://github.com/mozilla/pdf.js.git#v1.9.426"
