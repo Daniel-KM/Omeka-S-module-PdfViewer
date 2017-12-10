@@ -74,7 +74,7 @@ class Pdf implements RendererInterface
                     'media' => $media,
                     'attributes' => $attributes,
                 ];
-                return $view->partial('common/pdf-viewer', $values);
+                return $view->partial('common/pdf-viewer-inline', $values);
 
             case 'object':
                 $url = $view->escapeHtml($media->originalUrl());
@@ -103,9 +103,6 @@ class Pdf implements RendererInterface
                 return new Message('The mode "%s" is not managed by the pdf viewer.', $mode); // @translate
         }
     }
-
-    // universal viewer asset path
-//
 
     protected function fallback($media)
     {

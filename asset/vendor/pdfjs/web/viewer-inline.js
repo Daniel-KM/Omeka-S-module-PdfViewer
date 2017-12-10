@@ -34,11 +34,17 @@ var SCALE_SELECT_PADDING = 22;
 var PAGE_NUMBER_LOADING_INDICATOR = 'visiblePageIsLoading';
 var DISABLE_AUTO_FETCH_LOADING_BAR_TIMEOUT = 5000;
 
+DEFAULT_URL = documentUrl;
+
 function configure(PDFJS) {
   PDFJS.imageResourcesPath = './images/';
   PDFJS.workerSrc = '../build/pdf.worker.js';
   PDFJS.cMapUrl = '../web/cmaps/';
   PDFJS.cMapPacked = true;
+
+  PDFJS.workerSrc = '';
+  PDFJS.disableWorker = true;
+  PDFJS.cMapPacked = false;
 }
 
 var mozL10n = document.mozL10n || document.webL10n;
