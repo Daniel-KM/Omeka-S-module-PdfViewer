@@ -75,7 +75,7 @@ class Module extends AbstractModule
         if (version_compare($oldVersion, '3.0.1', '<')) {
             $settings = $serviceLocator->get('Omeka\Settings');
             $config = include __DIR__ . '/config/module.config.php';
-            foreach ($config[strtolower(__NAMESPACE__)]['settings'] as $name => $value) {
+            foreach ($config[strtolower(__NAMESPACE__)]['config'] as $name => $value) {
                 $oldName = str_replace('documentviewer_', 'document_viewer_', $name);
                 $settings->set($name, $settings->get($oldName, $value));
                 $settings->delete($oldName);
@@ -95,7 +95,7 @@ class Module extends AbstractModule
         }
     }
 
-    protected function manageSettings($settings, $process, $key = 'settings')
+    protected function manageSettings($settings, $process, $key = 'config')
     {
         $config = require __DIR__ . '/config/module.config.php';
         $defaultSettings = $config[strtolower(__NAMESPACE__)][$key];
@@ -141,15 +141,14 @@ class Module extends AbstractModule
         $services = $this->getServiceLocator();
         $config = $services->get('Config');
         $settings = $services->get('Omeka\Settings');
-        $formElementManager = $services->get('FormElementManager');
+        $form = $services->get('FormElementManager')->get(ConfigForm::class);
 
         $data = [];
-        $defaultSettings = $config[strtolower(__NAMESPACE__)]['settings'];
+        $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];
         foreach ($defaultSettings as $name => $value) {
             $data[$name] = $settings->get($name);
         }
 
-        $form = $formElementManager->get(ConfigForm::class);
         $form->init();
         $form->setData($data);
         $html = $renderer->formCollection($form);
@@ -164,8 +163,7 @@ class Module extends AbstractModule
 
         $params = $controller->getRequest()->getPost();
 
-        $form = $this->getServiceLocator()->get('FormElementManager')
-            ->get(ConfigForm::class);
+        $form = $services->get('FormElementManager')->get(ConfigForm::class);
         $form->init();
         $form->setData($params);
         if (!$form->isValid()) {
@@ -173,7 +171,7 @@ class Module extends AbstractModule
             return false;
         }
 
-        $defaultSettings = $config[strtolower(__NAMESPACE__)]['settings'];
+        $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];
         foreach ($params as $name => $value) {
             if (isset($defaultSettings[$name])) {
                 $settings->set($name, $value);

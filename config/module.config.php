@@ -32,7 +32,7 @@ return [
         ],
     ],
     'documentviewer' => [
-        'settings' => [
+        'config' => [
             'documentviewer_pdf_mode' => 'object',
             'documentviewer_pdf_style' => 'height: 600px; height: 70vh;',
         ],

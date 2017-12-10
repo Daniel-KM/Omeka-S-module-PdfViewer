@@ -17,7 +17,7 @@ Download the last release [`DocumentViewer.zip`] from the list of releases (the
 master does not contain the dependency), and uncompress it in the `modules`
 directory.
 
-* From the source and for development:
+* From the source and for development
 
 If the module was installed from the source, rename the name of the folder of
 the module to `DocumentViewer`, and go to the root module, and run:
