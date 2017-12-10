@@ -18,7 +18,7 @@ return [
     ],
     'form_elements' => [
         'invokables' => [
-            'DocumentViewer\Form\Config' => Form\Config::class,
+            'DocumentViewer\Form\ConfigForm' => Form\ConfigForm::class,
         ],
     ],
     'translator' => [

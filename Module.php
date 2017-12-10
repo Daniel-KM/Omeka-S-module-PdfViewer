@@ -31,9 +31,11 @@ namespace DocumentViewer;
 
 use Omeka\Module\AbstractModule;
 use Omeka\Module\Exception\ModuleCannotInstallException;
-use DocumentViewer\Form\Config as ConfigForm;
+use DocumentViewer\Form\ConfigForm;
 use Zend\EventManager\Event;
 use Zend\EventManager\SharedEventManagerInterface;
+use Zend\Form\Element\Select;
+use Zend\Form\Element\Text;
 use Zend\Form\Fieldset;
 use Zend\Mvc\Controller\AbstractController;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -200,7 +202,7 @@ class Module extends AbstractModule
         ];
         $fieldset->add([
             'name' => 'documentviewer_pdf_mode',
-            'type' => 'Select',
+            'type' => Select::class,
             'options' => [
                 'label' => 'Integration mode', // @translate
                 'info' => 'According to the needed compatibility level, the pdf viewer can be embedded in multiple ways.', // @translate
@@ -217,7 +219,7 @@ class Module extends AbstractModule
 
         $fieldset->add([
             'name' => 'documentviewer_pdf_style',
-            'type' => 'Text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Inline style', // @translate
                 'info' => 'If any, this style will be added to the main div of the Document Viewer.' // @translate
