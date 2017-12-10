@@ -8,8 +8,8 @@ return [
         ],
     ],
     'file_renderers' => [
-        'factories' => [
-            'pdfViewer' => Service\Media\FileRenderer\PdfFactory::class,
+        'invokables' => [
+            'pdfViewer' => Media\FileRenderer\Pdf::class,
         ],
         'aliases' => [
             'application/pdf' => 'pdfViewer',
@@ -17,8 +17,8 @@ return [
         ],
     ],
     'form_elements' => [
-        'invokables' => [
-            'DocumentViewer\Form\ConfigForm' => Form\ConfigForm::class,
+        'factories' => [
+            Form\ConfigForm::class => Service\Form\ConfigFormFactory::class,
         ],
     ],
     'translator' => [

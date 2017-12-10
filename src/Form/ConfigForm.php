@@ -1,10 +1,16 @@
 <?php
 namespace DocumentViewer\Form;
 
+use Zend\Form\Element\Select;
+use Zend\Form\Element\Text;
 use Zend\Form\Form;
+use Zend\I18n\Translator\TranslatorAwareInterface;
+use Zend\I18n\Translator\TranslatorAwareTrait;
 
-class ConfigForm extends Form
+class ConfigForm extends Form implements TranslatorAwareInterface
 {
+    use TranslatorAwareTrait;
+
     public function init()
     {
         $valueOptions = [
@@ -16,11 +22,11 @@ class ConfigForm extends Form
         ];
         $this->add([
             'name' => 'documentviewer_pdf_mode',
-            'type' => 'Select',
+            'type' => Select::class,
             'options' => [
                 'label' => 'Integration mode', // @translate
-                'info' => 'According to the needed compatibility level, the pdf viewer can be embedded in multiple ways.' // @translate
-                    . ' '  . 'These options are used in the admin board.', // @translate
+                'info' => $this->translate('According to the needed compatibility level, the pdf viewer can be embedded in multiple ways.') // @translate
+                    . ' '  . $this->translate('These options are used in the admin board.'), // @translate
                 'value_options' => $valueOptions,
             ],
             'attributes' => [
@@ -30,12 +36,18 @@ class ConfigForm extends Form
 
         $this->add([
             'name' => 'documentviewer_pdf_style',
-            'type' => 'Text',
+            'type' => Text::class,
             'options' => [
                 'label' => 'Inline style', // @translate
-                'info' => 'If any, this style will be added to the main div of the pdf.' // @translate
-                    . ' ' . 'The height may be required.', // @translate
+                'info' => $this->translate('If any, this style will be added to the main div of the pdf.') // @translate
+                    . ' ' . $this->translate('The height may be required.'), // @translate
             ],
         ]);
+    }
+
+    protected function translate($args)
+    {
+        $translator = $this->getTranslator();
+        return $translator->translate($args);
     }
 }

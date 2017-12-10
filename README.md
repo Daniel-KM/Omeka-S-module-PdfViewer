@@ -1,76 +1,60 @@
 Document Viewer (module for Omeka S)
 ====================================
 
-[![Build Status](https://travis-ci.org/Daniel-KM/Omeka-S-module-DocumentViewer.svg?branch=master)](https://travis-ci.org/Daniel-KM/Omeka-S-module-DocumentViewer)
-
-[Document Viewer] is a module for [Omeka S] that allows to display common
-document standard formats (pdf and office ones). Supported format are:
-
-- Portable document format (pdf)
-- OpenDocument Text (odt)
-- OpenDocument Spreadsheet (ods)
-- OpenDocument Presentation (odp)
-
-The pdf is integrated via the library of Mozilla [pdf.js] and the office formats
-via [WebODF].
+[Document Viewer] is a module for [Omeka S] that allows to display pdf via the
+Mozilla [pdf.js] library or via the reader integrated in the user browser.
 
 
 Installation
 ------------
 
-Uncompress files and rename module folder "DocumentViewer".
+The module uses an external library, [pdf.js], so use the release zip to install
+it, or use and init the source.
 
-Then install it like any other Omeka module.
+* From the zip
+
+Download the last release [`DocumentViewer.zip`] from the list of releases (the
+master does not contain the dependency), and uncompress it in the `modules`
+directory.
+
+* From the source and for development:
+
+If the module was installed from the source, rename the name of the folder of
+the module to `DocumentViewer`, and go to the root module, and run:
+
+```
+    npm install
+    cd node_modules/pdf.js
+    npm install
+    gulp dist
+    cd ../..
+    gulp
+```
+
+For update:
+
+```
+    npm update
+    cd node_modules/pdf.js
+    npm update
+    gulp dist
+    cd ../..
+    gulp
+```
+
+
+Config
+------
+
+All resources of Omeka S that are in pdf are automatically displayed by the
+DocumentViewer, so you have nothing to do.
 
 Options can be set differently for each site:
 
 - in site settings for the integration of the player;
 - in the json file "config.json" of pdf.js for the player itself: copy and
-  update it in a folder named "document-viewer" inside the folder of the
-  theme;
-- via the helper: to use an alternative config for some items, add an option
-  `config` with its url in the array of arguments passed to the viewer (see
-  below).
-
-See below the notes for more info.
-
-* Javascript library "pdf.js"
-
-The distribution release of the javascript library [pdf.js] is included in the
-folder `asset/vendor/pdfjs/`.
-
-If you want a more recent release, clone it inside asset/pdfjs. In command line,
-from the root of the module, the first time:
-
-```
-    npm install
-    cd node_modules/pdf.js
-    npm install
-    gulp dist
-    cd ../..
-    gulp
-```
-
-The next times:
-
-```
-    npm update
-    cd node_modules/pdf.js
-    npm update
-    gulp dist
-    cd ../..
-    gulp
-```
-
-IMPORTANT: currently, the integrated pdf.js library is sligthy modified. See
-`view/common/pdf-viewer.phtml` for details.
-
-
-Usage
------
-
-All resources of Omeka S that are in pdf are automatically displayed by the
-DocumentViewer, so you have nothing to do.
+  update the files in `asset/vendor/pdfjs` and/or the file `common/document-viewer/pdf-viewer-inline.phtml`
+  inside your theme.
 
 
 Warning
@@ -138,8 +122,6 @@ Module DocumentViewer for Omeka S:
 [Omeka S]: https://omeka.org/s
 [Omeka]: https://omeka.org
 [pdf.js]: https://mozilla.github.io/pdf.js
-[WebODF]: https://github.com/kogmbh/WebODF
-[distribution]: https://github.com/mozilla/pdf.js
 [module issues]: https://github.com/Daniel-KM/Omeka-S-module-DocumentViewer/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
 [GNU/GPL]: https://www.gnu.org/licenses/gpl-3.0.html
