@@ -1,8 +1,9 @@
-Document Viewer (module for Omeka S)
+Document Viewer (module for Omeka S)
 ====================================
 
-[Document Viewer] is a module for [Omeka S] that allows to display pdf via the
-Mozilla [pdf.js] library or via the reader integrated in the user browser.
+[Document Viewer] is a module for [Omeka S] that allows to display pdf files
+with the browser reader or via an internal reader (the Mozilla library [pdf.js]),
+at the choice of the admin.
 
 
 Installation
@@ -53,7 +54,7 @@ Options can be set differently for each site:
 
 - in site settings for the integration of the player;
 - in the json file "config.json" of pdf.js for the player itself: copy and
-  update the files in `asset/vendor/pdfjs` and/or the file `common/document-viewer/pdf-viewer-inline.phtml`
+  update the files in `asset/vendor/pdfjs` and/or the file `common/pdf-viewer-inline.phtml`
   inside your theme.
 
 
@@ -120,7 +121,6 @@ Module DocumentViewer for Omeka S:
 
 [Document Viewer]: https://github.com/Daniel-KM/Omeka-S-module-DocumentViewer
 [Omeka S]: https://omeka.org/s
-[Omeka]: https://omeka.org
 [pdf.js]: https://mozilla.github.io/pdf.js
 [module issues]: https://github.com/Daniel-KM/Omeka-S-module-DocumentViewer/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
