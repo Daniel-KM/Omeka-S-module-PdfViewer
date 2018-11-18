@@ -50,7 +50,7 @@ class Module extends AbstractModule
 
     public function install(ServiceLocatorInterface $serviceLocator)
     {
-        $js = __DIR__ . '/asset/vendor/pdfjs/build/pdf.js';
+        $js = __DIR__ . '/asset/vendor/pdf.js/build/pdf.js';
         if (!file_exists($js)) {
             $t = $serviceLocator->get('MvcTranslator');
             throw new ModuleCannotInstallException(

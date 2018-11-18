@@ -13,11 +13,11 @@ gulp.task('clean', function(done) {
 gulp.task('sync', gulp.series([
     function (next) {
         gulp.src(['node_modules/pdf.js/build/generic/**'])
-        .pipe(gulp.dest('asset/vendor/pdfjs/'))
+        .pipe(gulp.dest('asset/vendor/pdf.js/'))
         .on('end', next);
     },
     function (next) {
-        del('asset/vendor/pdfjs/web/compressed.tracemonkey-pldi-09.pdf');
+        del('asset/vendor/pdf.js/web/compressed.tracemonkey-pldi-09.pdf');
         next();
     },
     function (next) {
@@ -25,12 +25,12 @@ gulp.task('sync', gulp.series([
             'node_modules/pdf.js/build/dist/build/pdf.min.js',
             'node_modules/pdf.js/build/dist/build/pdf.worker.min.js'
         ])
-        .pipe(gulp.dest('asset/vendor/pdfjs/build/'))
+        .pipe(gulp.dest('asset/vendor/pdf.js/build/'))
         .on('end', next);
     }])
 );
 
-const hack_documentviewer = function (done) {
+const hack_documentviewer_pdfjs = function (done) {
     gulp.src(['node_modules/pdf.js/build/generic/web/viewer.css'])
         .pipe(rename('viewer-inline.css'))
         .pipe(sourcemaps.init())
@@ -42,19 +42,19 @@ const hack_documentviewer = function (done) {
         .pipe(replace(/^button,$/gm, '.pdfjs button,'))
         .pipe(replace(/^select \{$/gm, '.pdfjs select {'))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('asset/vendor/pdfjs/web'));
+        .pipe(gulp.dest('asset/vendor/pdf.js/web'));
 
-    gulp.src(['asset/vendor/pdfjs/web/viewer.js'])
+    gulp.src(['asset/vendor/pdf.js/web/viewer.js'])
         .pipe(rename('viewer-inline.js'))
         .pipe(sourcemaps.init())
-        .pipe(replace("var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';", 'var DEFAULT_URL = documentUrl;'))
-        .pipe(replace("PDFJS.workerSrc = '../build/pdf.worker.js';", "PDFJS.workerSrc = '';"))
+        .pipe(replace("value: 'compressed.tracemonkey-pldi-09.pdf',", 'value: documentUrl,'))
+        .pipe(replace("value: '../build/pdf.worker.js',", "value: '',"))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('asset/vendor/pdfjs/web/'))
+        .pipe(gulp.dest('asset/vendor/pdf.js/web/'))
         .on('end', done);
 };
 
-gulp.task('default', gulp.series('clean', 'sync', hack_documentviewer));
+gulp.task('default', gulp.series('clean', 'sync', hack_documentviewer_pdfjs));
 
 gulp.task('install', gulp.task('default'));
 
