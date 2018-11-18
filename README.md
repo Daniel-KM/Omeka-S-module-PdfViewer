@@ -2,15 +2,17 @@ Document Viewer (module for Omeka S)
 ====================================
 
 [Document Viewer] is a module for [Omeka S] that allows to display pdf files
-with the browser reader or via an internal reader (the Mozilla library [pdf.js]),
-at the choice of the admin.
+with the browser reader or via the customizable internal reader, the same Mozilla
+library [`pdf.js`], at the choice of the admin and site admins.
 
 
 Installation
 ------------
 
-The module uses an external library, [pdf.js], so use the release zip to install
-it, or use and init the source.
+The module uses an external library, [`pdf.js`], so use the release zip to
+install it, or use and init the source.
+
+See general end user documentation for [installing a module].
 
 * From the zip
 
@@ -48,7 +50,7 @@ Config
 ------
 
 All resources of Omeka S that are in pdf are automatically displayed by the
-DocumentViewer, so you have nothing to do.
+Document Viewer, so you have nothing to do.
 
 Options can be set differently for each site:
 
@@ -79,49 +81,48 @@ License
 This module is published under the [CeCILL v2.1] licence, compatible with
 [GNU/GPL] and approved by [FSF] and [OSI].
 
-In consideration of access to the source code and the rights to copy, modify and
+This software is governed by the CeCILL license under French law and abiding by
+the rules of distribution of free software. You can use, modify and/ or
+redistribute the software under the terms of the CeCILL license as circulated by
+CEA, CNRS and INRIA at the following URL "http://www.cecill.info".
+
+As a counterpart to the access to the source code and rights to copy, modify and
 redistribute granted by the license, users are provided only with a limited
 warranty and the software’s author, the holder of the economic rights, and the
-successive licensors only have limited liability.
+successive licensors have only limited liability.
 
-In this respect, the risks associated with loading, using, modifying and/or
-developing or reproducing the software by the user are brought to the user’s
-attention, given its Free Software status, which may make it complicated to use,
-with the result that its use is reserved for developers and experienced
-professionals having in-depth computer knowledge. Users are therefore encouraged
-to load and test the suitability of the software as regards their requirements
-in conditions enabling the security of their systems and/or data to be ensured
-and, more generally, to use and operate it in the same conditions of security.
-This Agreement may be freely reproduced and published, provided it is not
-altered, and that no provisions are either added or removed herefrom.
+In this respect, the user’s attention is drawn to the risks associated with
+loading, using, modifying and/or developing or reproducing the software by the
+user in light of its specific status of free software, that may mean that it is
+complicated to manipulate, and that also therefore means that it is reserved for
+developers and experienced professionals having in-depth computer knowledge.
+Users are therefore encouraged to load and test the software’s suitability as
+regards their requirements in conditions enabling the security of their systems
+and/or data to be ensured and, more generally, to use and operate it in the same
+conditions as regards security.
 
-The [pdf.js] library is published under the [Apache] license.
+The fact that you are presently reading this means that you have had knowledge
+of the CeCILL license and that you accept its terms.
 
-
-Contact
--------
-
-See documentation on the [pdf.js] on its site.
-
-Current maintainers of the module:
-* Daniel Berthereau (see [Daniel-KM])
+The [`pdf.js`] library is published under the [Apache] license.
 
 
 Copyright
 ---------
 
-Javascript library [pdf.js]:
+Javascript library [`pdf.js`]:
 
 * Copyright Mozilla, 2011-2017
 
-Module DocumentViewer for Omeka S:
+Module Document Viewer for Omeka S:
 
-* Copyright Daniel Berthereau, 2017
+* Copyright Daniel Berthereau, 2017 (see [Daniel-KM] on GitHub)
 
 
 [Document Viewer]: https://github.com/Daniel-KM/Omeka-S-module-DocumentViewer
 [Omeka S]: https://omeka.org/s
-[pdf.js]: https://mozilla.github.io/pdf.js
+[`pdf.js`]: https://mozilla.github.io/pdf.js
+[installing a module]: http://dev.omeka.org/docs/s/user-manual/modules/#installing-modules
 [module issues]: https://github.com/Daniel-KM/Omeka-S-module-DocumentViewer/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
 [GNU/GPL]: https://www.gnu.org/licenses/gpl-3.0.html
