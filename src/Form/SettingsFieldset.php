@@ -16,6 +16,7 @@ class SettingsFieldset extends Fieldset
             'embed' => 'Embed', // @translate
             'iframe' => 'Iframe (most common)', // @translate
             'object_iframe' => 'Object + iframe (max compatibility)', // @translate
+            'custom' => 'Custom (via the partial common/document-viewer)', // @translate
         ];
 
         $this->add([

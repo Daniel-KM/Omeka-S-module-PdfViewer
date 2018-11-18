@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var \Zend\View\Renderer\PhpRenderer $this
+ * @var \Omeka\Api\Representation\MediaRepresentation $media
+ * @var string $attributes
+ * @var string $style
+ */
+
+$escape = $this->plugin('escapeHtmlAttr');
+$url = $media->originalUrl();
+// No fallback for HTML5.
+?>
+<iframe height="100%" width="100%" <?php echo $attributes; ?><?php if ($style) echo ' style="' . $style . '"'; ?> src="<?php echo $escape($url); ?>"></iframe>

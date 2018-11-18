@@ -85,6 +85,14 @@ class Pdf implements RendererInterface
                     . '</object>';
                 break;
 
+            case 'custom':
+                return $view->partial('common/document-viewer', [
+                    'media' => $media,
+                    'attributes' => $attributes,
+                    'style' => $style,
+                ]);
+                break;
+
             default:
                 return new Message('The mode "%s" is not managed by the pdf viewer.', $mode); // @translate
         }
