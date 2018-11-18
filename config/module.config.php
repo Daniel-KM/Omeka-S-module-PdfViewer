@@ -33,12 +33,12 @@ return [
     ],
     'documentviewer' => [
         'settings' => [
-            'documentviewer_pdf_mode' => 'object',
-            'documentviewer_pdf_style' => 'height: 600px; height: 70vh;',
+            'documentviewer_mode' => 'object',
+            'documentviewer_style' => 'height: 600px; height: 70vh;',
         ],
         'site_settings' => [
-            'documentviewer_pdf_mode' => 'object',
-            'documentviewer_pdf_style' => 'height: 600px; height: 70vh;',
+            'documentviewer_mode' => 'object',
+            'documentviewer_style' => 'height: 600px; height: 70vh;',
         ],
     ],
 ];

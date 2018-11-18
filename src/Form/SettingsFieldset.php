@@ -20,7 +20,7 @@ class SettingsFieldset extends Fieldset
         ];
 
         $this->add([
-            'name' => 'documentviewer_pdf_mode',
+            'name' => 'documentviewer_mode',
             'type' => Element\Select::class,
             'options' => [
                 'label' => 'Integration mode', // @translate
@@ -33,7 +33,7 @@ class SettingsFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name' => 'documentviewer_pdf_style',
+            'name' => 'documentviewer_style',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Inline style', // @translate

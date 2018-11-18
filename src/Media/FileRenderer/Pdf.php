@@ -44,19 +44,19 @@ class Pdf implements RendererInterface
 
         $isAdmin = $view->params()->fromRoute('__ADMIN__');
         if ($isAdmin) {
-            $mode = $view->setting('documentviewer_pdf_mode', $this->defaultOptions['mode']);
+            $mode = $view->setting('documentviewer_mode', $this->defaultOptions['mode']);
             $attributes = $this->defaultOptions['attributes'];
-            $style = $view->setting('documentviewer_pdf_style', $this->defaultOptions['style']);
+            $style = $view->setting('documentviewer_style', $this->defaultOptions['style']);
         } else {
             $mode = isset($options['mode'])
                 ? $options['mode']
-                : $view->siteSetting('documentviewer_pdf_mode', $this->defaultOptions['mode']);
+                : $view->siteSetting('documentviewer_mode', $this->defaultOptions['mode']);
             $attributes = isset($options['attributes'])
                 ? $options['attributes']
-                : $view->siteSetting('documentviewer_pdf_attributes', $this->defaultOptions['attributes']);
+                : $view->siteSetting('documentviewer_attributes', $this->defaultOptions['attributes']);
             $style = isset($options['style'])
                 ? $options['style']
-                : $view->siteSetting('documentviewer_pdf_style', $this->defaultOptions['style']);
+                : $view->siteSetting('documentviewer_style', $this->defaultOptions['style']);
         }
 
         switch ($mode) {

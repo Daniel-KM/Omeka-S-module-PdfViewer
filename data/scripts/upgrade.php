@@ -37,3 +37,22 @@ if (version_compare($oldVersion, '3.0.1', '<')) {
         }
     }
 }
+
+if (version_compare($oldVersion, '3.1.1', '<')) {
+    foreach ($config[$space]['settings'] as $name => $value) {
+        $oldName = str_replace('documentviewer_', 'documentviewer_pdf_', $name);
+        $settings->set($name, $settings->get($oldName, $value));
+        $settings->delete($oldName);
+    }
+
+    $settings = $serviceLocator->get('Omeka\Settings\Site');
+    $sites = $api->search('sites')->getContent();
+    foreach ($sites as $site) {
+        $settings->setTargetId($site->id());
+        foreach ($config[$space]['site_settings'] as $name => $value) {
+            $oldName = str_replace('documentviewer_', 'documentviewer_pdf_', $name);
+            $settings->set($name, $settings->get($oldName, $value));
+            $settings->delete($oldName);
+        }
+    }
+}
