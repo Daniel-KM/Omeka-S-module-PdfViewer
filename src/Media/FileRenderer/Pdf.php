@@ -69,19 +69,20 @@ class Pdf implements RendererInterface
 
             case 'object':
                 $html = '<object height="100%%" width="100%%" %1$s%2$s data="%3$s" type="application/pdf">%4$s</object>';
-                break;
+                return vsprintf($html, [$attributes, $style ? ' style="' . $style . '"' : '', $media->originalUrl(), $this->fallback($media)]);
 
             case 'embed':
                 $html = '<embed height="100%%" width="100%%" %1$s%2$s src="%3$s" type="application/pdf" />';
                 break;
 
+            // No fallback in html5.
             case 'iframe':
-                $html = '<iframe height="100%%" width="100%%" %1$s%2$s src="%3$s">%4$s</iframe>';
+                $html = '<iframe height="100%%" width="100%%" %1$s%2$s src="%3$s"></iframe>';
                 break;
 
             case 'object_iframe':
                 $html = '<object height="100%%" width="100%%" %1$s%2$s data="%3$s" type="application/pdf">'
-                    . '<iframe height="100%%" width="100%%" %1$s%2$s src="%3$s">%4$s</iframe>'
+                    . '<iframe height="100%%" width="100%%" %1$s%2$s src="%3$s"></iframe>'
                     . '</object>';
                 break;
 
@@ -96,7 +97,7 @@ class Pdf implements RendererInterface
             default:
                 return new Message('The mode "%s" is not managed by the pdf viewer.', $mode); // @translate
         }
-        return vsprintf($html, [$attributes, $style ? ' style="' . $style . '"' : '', $media->originalUrl(), $this->fallback($media)]);
+        return vsprintf($html, [$attributes, $style ? ' style="' . $style . '"' : '', $media->originalUrl()]);
     }
 
     protected function fallback($media)
