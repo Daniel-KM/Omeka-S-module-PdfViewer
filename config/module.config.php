@@ -1,5 +1,5 @@
 <?php
-namespace DocumentViewer;
+namespace PdfViewer;
 
 return [
     'view_manager' => [
@@ -31,14 +31,14 @@ return [
             ],
         ],
     ],
-    'documentviewer' => [
+    'pdfviewer' => [
         'settings' => [
-            'documentviewer_mode' => 'object',
-            'documentviewer_style' => 'height: 600px; height: 70vh;',
+            'pdfviewer_mode' => 'object',
+            'pdfviewer_style' => 'height: 600px; height: 70vh;',
         ],
         'site_settings' => [
-            'documentviewer_mode' => 'object',
-            'documentviewer_style' => 'height: 600px; height: 70vh;',
+            'pdfviewer_mode' => 'object',
+            'pdfviewer_style' => 'height: 600px; height: 70vh;',
         ],
     ],
 ];

@@ -31,12 +31,12 @@
  * knowledge of the CeCILL license and that you accept its terms.
  */
 
-namespace DocumentViewer;
+namespace PdfViewer;
 
-use DocumentViewer\Form\SettingsFieldset;
 use Omeka\Module\AbstractModule;
 use Omeka\Module\Exception\ModuleCannotInstallException;
 use Omeka\Settings\SettingsInterface;
+use PdfViewer\Form\SettingsFieldset;
 use Zend\EventManager\Event;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -66,11 +66,6 @@ class Module extends AbstractModule
     {
         $this->manageMainSettings($serviceLocator, 'uninstall');
         $this->manageSiteSettings($serviceLocator, 'uninstall');
-    }
-
-    public function upgrade($oldVersion, $newVersion, ServiceLocatorInterface $serviceLocator)
-    {
-        require_once __DIR__ . '/data/scripts/upgrade.php';
     }
 
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)

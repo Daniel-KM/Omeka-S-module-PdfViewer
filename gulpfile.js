@@ -30,7 +30,7 @@ gulp.task('sync', gulp.series([
     }])
 );
 
-const hack_documentviewer_pdfjs = function (done) {
+const hack_pdfviewer_pdfjs = function (done) {
     gulp.src(['node_modules/pdf.js/build/generic/web/viewer.css'])
         .pipe(rename('viewer-inline.css'))
         .pipe(sourcemaps.init())
@@ -54,7 +54,7 @@ const hack_documentviewer_pdfjs = function (done) {
         .on('end', done);
 };
 
-gulp.task('default', gulp.series('clean', 'sync', hack_documentviewer_pdfjs));
+gulp.task('default', gulp.series('clean', 'sync', hack_pdfviewer_pdfjs));
 
 gulp.task('install', gulp.task('default'));
 

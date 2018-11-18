@@ -1,7 +1,7 @@
-Document Viewer (module for Omeka S)
-====================================
+Pdf Viewer (module for Omeka S)
+===============================
 
-[Document Viewer] is a module for [Omeka S] that allows to display pdf files
+[Pdf Viewer] is a module for [Omeka S] that allows to display pdf files
 with the browser reader or via the customizable internal reader, the same Mozilla
 library [`pdf.js`], at the choice of the admin and site admins.
 
@@ -16,14 +16,14 @@ See general end user documentation for [installing a module].
 
 * From the zip
 
-Download the last release [`DocumentViewer.zip`] from the list of releases (the
+Download the last release [`PdfViewer.zip`] from the list of releases (the
 master does not contain the dependency), and uncompress it in the `modules`
 directory.
 
 * From the source and for development
 
 If the module was installed from the source, rename the name of the folder of
-the module to `DocumentViewer`, and go to the root module, and run:
+the module to `PdfViewer`, and go to the root module, and run:
 
 ```
     npm install
@@ -50,7 +50,7 @@ Config
 ------
 
 All resources of Omeka S that are in pdf are automatically displayed by the
-Document Viewer, so you have nothing to do.
+Pdf Viewer, so you have nothing to do.
 
 Options can be set differently for each site:
 
@@ -114,16 +114,17 @@ Javascript library [`pdf.js`]:
 
 * Copyright Mozilla, 2011-2017
 
-Module Document Viewer for Omeka S:
+Module Pdf Viewer for Omeka S:
 
 * Copyright Daniel Berthereau, 2017 (see [Daniel-KM] on GitHub)
 
 
-[Document Viewer]: https://github.com/Daniel-KM/Omeka-S-module-DocumentViewer
+[Pdf Viewer]: https://github.com/Daniel-KM/Omeka-S-module-PdfViewer
 [Omeka S]: https://omeka.org/s
 [`pdf.js`]: https://mozilla.github.io/pdf.js
 [installing a module]: http://dev.omeka.org/docs/s/user-manual/modules/#installing-modules
-[module issues]: https://github.com/Daniel-KM/Omeka-S-module-DocumentViewer/issues
+[`PdfViewer.zip`]: https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/releases
+[module issues]: https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
 [GNU/GPL]: https://www.gnu.org/licenses/gpl-3.0.html
 [FSF]: https://www.fsf.org

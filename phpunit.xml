@@ -13,8 +13,8 @@
     beStrictAboutTodoAnnotatedTests="true"
     >
     <testsuites>
-        <testsuite name="DocumentViewer">
-            <directory suffix="Test.php">test/DocumentViewerTest</directory>
+        <testsuite name="PdfViewer">
+            <directory suffix="Test.php">test/PdfViewerTest</directory>
         </testsuite>
     </testsuites>
     <filter>

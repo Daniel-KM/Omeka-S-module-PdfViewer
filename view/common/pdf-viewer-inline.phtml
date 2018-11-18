@@ -18,21 +18,21 @@
 $translate = $this->plugin('translate');
 // $this->headMeta()->appendName('google', 'notranslate');
 $this->headMeta()->appendHttpEquiv('X-UA-Compatible', 'IE=edge');
-$this->headLink()->appendStylesheet($this->assetUrl('vendor/pdf.js/web/viewer-inline.css', 'DocumentViewer'));
+$this->headLink()->appendStylesheet($this->assetUrl('vendor/pdf.js/web/viewer-inline.css', 'PdfViewer'));
 // <!-- This snippet is used in production (included from viewer.html) -->
-$this->headLink(['rel' => 'resource', 'type' => 'application/l10n', 'href' => $this->assetUrl('vendor/pdf.js/web/locale/locale.properties', 'DocumentViewer')]);
+$this->headLink(['rel' => 'resource', 'type' => 'application/l10n', 'href' => $this->assetUrl('vendor/pdf.js/web/locale/locale.properties', 'PdfViewer')]);
 
 $this->headScript()->appendScript(
     'var basePath = ' . json_encode($this->basePath(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';
 var documentUrl = ' . json_encode($media->originalUrl(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';'
 );
 
-$this->headScript()->appendFile($this->assetUrl('vendor/pdf.js/build/pdf.min.js', 'DocumentViewer'));
-$this->headScript()->appendFile($this->assetUrl('vendor/pdf.js/web/viewer-inline.js', 'DocumentViewer'));
+$this->headScript()->appendFile($this->assetUrl('vendor/pdf.js/build/pdf.min.js', 'PdfViewer'));
+$this->headScript()->appendFile($this->assetUrl('vendor/pdf.js/web/viewer-inline.js', 'PdfViewer'));
 
 // Fix some issues to avoid mix of styles of the pages and styles of the pdf.
 $this->headStyle()->captureStart(); ?>
-.pdfjs { background-color: #404040; background-image: url(<?php echo $this->assetUrl('vendor/pdf.js/web/images/texture.png', 'DocumentViewer'); ?>); font: message-box; outline: none; overflow: hidden; }
+.pdfjs { background-color: #404040; background-image: url(<?php echo $this->assetUrl('vendor/pdf.js/web/images/texture.png', 'PdfViewer'); ?>); font: message-box; outline: none; overflow: hidden; }
 .pdfjs { width: 100%; <?php echo $style; ?> }
 @media print {
   .pdfjs { background: transparent none; }

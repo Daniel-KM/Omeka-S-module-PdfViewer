@@ -1,5 +1,5 @@
 <?php
-namespace DocumentViewer\Form;
+namespace PdfViewer\Form;
 
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
@@ -8,7 +8,7 @@ class SettingsFieldset extends Fieldset
 {
     public function init()
     {
-        $this->setLabel('Document Viewer'); // @translate
+        $this->setLabel('Pdf Viewer'); // @translate
 
         $valueOptions = [
             'inline' => 'Inline (easily customizable)', // @translate
@@ -16,11 +16,11 @@ class SettingsFieldset extends Fieldset
             'embed' => 'Embed', // @translate
             'iframe' => 'Iframe (most common)', // @translate
             'object_iframe' => 'Object + iframe (max compatibility)', // @translate
-            'custom' => 'Custom (via the partial common/document-viewer)', // @translate
+            'custom' => 'Custom (via the partial common/pdf-viewer)', // @translate
         ];
 
         $this->add([
-            'name' => 'documentviewer_mode',
+            'name' => 'pdfviewer_mode',
             'type' => Element\Select::class,
             'options' => [
                 'label' => 'Integration mode', // @translate
@@ -33,7 +33,7 @@ class SettingsFieldset extends Fieldset
         ]);
 
         $this->add([
-            'name' => 'documentviewer_style',
+            'name' => 'pdfviewer_style',
             'type' => Element\Text::class,
             'options' => [
                 'label' => 'Inline style', // @translate
