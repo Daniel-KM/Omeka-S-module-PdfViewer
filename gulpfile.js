@@ -7,7 +7,8 @@ const replace = require('gulp-string-replace');
 const sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('clean', function(done) {
-    return del('asset/vendor/pdfjs');
+    del.sync('asset/vendor/pdf.js');
+    done();
 });
 
 gulp.task('sync', gulp.series([
@@ -17,7 +18,7 @@ gulp.task('sync', gulp.series([
         .on('end', next);
     },
     function (next) {
-        del('asset/vendor/pdf.js/web/compressed.tracemonkey-pldi-09.pdf');
+        del.sync('asset/vendor/pdf.js/web/compressed.tracemonkey-pldi-09.pdf');
         next();
     },
     function (next) {
