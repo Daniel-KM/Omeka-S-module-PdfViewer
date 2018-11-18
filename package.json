@@ -27,9 +27,9 @@
   ],
   "devDependencies": {
     "del": "^3.0.0",
-    "gulp": "git+https://github.com/gulpjs/gulp.git#4.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^2.6.1",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-string-replace": "^0.4.0"
   },
   "dependencies": {
