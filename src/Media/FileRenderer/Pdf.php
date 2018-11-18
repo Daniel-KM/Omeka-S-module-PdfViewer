@@ -16,8 +16,8 @@ class Pdf implements RendererInterface
      */
     protected $defaultOptions = [
         'mode' => 'inline',
-        'attributes' => 'allowfullscreen="1"',
-        'style' => 'height: 600px; 70vh',
+        'attributes' => 'allowfullscreen="allowfullscreen"',
+        'style' => 'height: 600px; height: 70vh',
     ];
 
     /**
@@ -42,23 +42,18 @@ class Pdf implements RendererInterface
     {
         $this->setView($view);
 
-        $isSite = $view->params()->fromRoute('__SITE__');
-        // For admin board.
-        if (empty($isSite)) {
+        $isAdmin = $view->params()->fromRoute('__ADMIN__');
+        if ($isAdmin) {
             $mode = $view->setting('documentviewer_pdf_mode', $this->defaultOptions['mode']);
             $attributes = $this->defaultOptions['attributes'];
             $style = $view->setting('documentviewer_pdf_style', $this->defaultOptions['style']);
-        }
-        // For sites.
-        else {
+        } else {
             $mode = isset($options['mode'])
                 ? $options['mode']
                 : $view->siteSetting('documentviewer_pdf_mode', $this->defaultOptions['mode']);
-
             $attributes = isset($options['attributes'])
                 ? $options['attributes']
                 : $view->siteSetting('documentviewer_pdf_attributes', $this->defaultOptions['attributes']);
-
             $style = isset($options['style'])
                 ? $options['style']
                 : $view->siteSetting('documentviewer_pdf_style', $this->defaultOptions['style']);

@@ -17,8 +17,8 @@ return [
         ],
     ],
     'form_elements' => [
-        'factories' => [
-            Form\ConfigForm::class => Service\Form\ConfigFormFactory::class,
+        'invokables' => [
+            Form\SettingsFieldset::class => Form\SettingsFieldset::class,
         ],
     ],
     'translator' => [
@@ -32,7 +32,7 @@ return [
         ],
     ],
     'documentviewer' => [
-        'config' => [
+        'settings' => [
             'documentviewer_pdf_mode' => 'object',
             'documentviewer_pdf_style' => 'height: 600px; height: 70vh;',
         ],

@@ -7,6 +7,7 @@
 // - the PDF file is set via a variable instead of a url query parameter,
 // - a noscript element is added at the end,
 // By this way, it can be overridden and customized via the theme, if needed.
+
 ?>
 <!--
 Copyright 2012 Mozilla Foundation
@@ -30,6 +31,14 @@ Adobe CMap resources are covered by their own copyright but the same license:
 See https://github.com/adobe-type-tools/cmap-resources
 -->
 <?php
+
+/**
+ * @var \Zend\View\Renderer\PhpRenderer $this
+ * @var \Omeka\Api\Representation\MediaRepresentation $media
+ * @var string $style
+ */
+
+$translate = $this->plugin('translate');
 // $this->headMeta()->appendName('google', 'notranslate');
 $this->headMeta()->appendHttpEquiv('X-UA-Compatible', 'IE=edge');
 $this->headLink()->appendStylesheet($this->assetUrl('vendor/pdfjs/web/viewer-inline.css', 'DocumentViewer'));
@@ -37,8 +46,8 @@ $this->headLink()->appendStylesheet($this->assetUrl('vendor/pdfjs/web/viewer-inl
 $this->headLink(['rel' => 'resource', 'type' => 'application/l10n', 'href' => $this->assetUrl('vendor/pdfjs/web/locale/locale.properties', 'DocumentViewer')]);
 
 $this->headScript()->appendScript(
-   'var basePath = ' . json_encode($this->basePath()) . ';
-    var documentUrl = ' . json_encode($media->originalUrl()) . ';'
+    'var basePath = ' . json_encode($this->basePath(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';
+var documentUrl = ' . json_encode($media->originalUrl(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';'
 );
 
 $this->headScript()->appendFile($this->assetUrl('vendor/pdfjs/build/pdf.min.js', 'DocumentViewer'));
@@ -378,8 +387,8 @@ $this->headStyle()->captureStart(); ?>
 </div>
 <noscript>
   <p>
-    <?php echo $this->escapeHtml($this->translate('This browser does not support PDF.')); ?>
-    <?php echo sprintf($this->translate('You may %sdownload it%s to view it offline.'),
+    <?php echo $this->escapeHtml($translate('This browser does not support PDF.')); ?>
+    <?php echo sprintf($translate('You may %sdownload it%s to view it offline.'),
         '<a href="' . $media->originalUrl() . '">', '</a>'); ?>
     <img src="<?php echo $media->thumbnailUrl('large'); ?>" height="600px" />
   </p>

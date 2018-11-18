@@ -30,32 +30,31 @@ gulp.task('sync', gulp.series([
     }])
 );
 
-gulp.task('hack_viewer', function (done) {
+const hack_documentviewer = function (done) {
     gulp.src(['node_modules/pdf.js/build/generic/web/viewer.css'])
-    .pipe(rename('viewer-inline.css'))
-    .pipe(sourcemaps.init())
-    .pipe(replace('html \{', '.pdfjs-html {'))
-    .pipe(replace('body \{', '.pdfjs {'))
-    .pipe(replace(/^\* \{$/gm, '.pdfjs * {'))
-    .pipe(replace(/body\,/gm, '.pdfjs,'))
-    .pipe(replace(/^input,$/gm, '.pdfjs input,'))
-    .pipe(replace(/^button,$/gm, '.pdfjs button,'))
-    .pipe(replace(/^select \{$/gm, '.pdfjs select {'))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('asset/vendor/pdfjs/web'));
+        .pipe(rename('viewer-inline.css'))
+        .pipe(sourcemaps.init())
+        .pipe(replace('html \{', '.pdfjs-html {'))
+        .pipe(replace('body \{', '.pdfjs {'))
+        .pipe(replace(/^\* \{$/gm, '.pdfjs * {'))
+        .pipe(replace(/body\,/gm, '.pdfjs,'))
+        .pipe(replace(/^input,$/gm, '.pdfjs input,'))
+        .pipe(replace(/^button,$/gm, '.pdfjs button,'))
+        .pipe(replace(/^select \{$/gm, '.pdfjs select {'))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('asset/vendor/pdfjs/web'));
 
     gulp.src(['asset/vendor/pdfjs/web/viewer.js'])
-    .pipe(rename('viewer-inline.js'))
-    .pipe(sourcemaps.init())
-    .pipe(replace("var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';", 'var DEFAULT_URL = documentUrl;'))
-    .pipe(replace("PDFJS.workerSrc = '../build/pdf.worker.js';", "PDFJS.workerSrc = '';"))
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('asset/vendor/pdfjs/web/'));
+        .pipe(rename('viewer-inline.js'))
+        .pipe(sourcemaps.init())
+        .pipe(replace("var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';", 'var DEFAULT_URL = documentUrl;'))
+        .pipe(replace("PDFJS.workerSrc = '../build/pdf.worker.js';", "PDFJS.workerSrc = '';"))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('asset/vendor/pdfjs/web/'))
+        .on('end', done);
+};
 
-    done();
-});
-
-gulp.task('default', gulp.series('clean', 'sync', 'hack_viewer'));
+gulp.task('default', gulp.series('clean', 'sync', hack_documentviewer));
 
 gulp.task('install', gulp.task('default'));
 
