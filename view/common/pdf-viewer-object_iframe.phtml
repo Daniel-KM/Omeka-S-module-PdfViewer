@@ -1,0 +1,15 @@
+<?php
+/**
+ * @var \Zend\View\Renderer\PhpRenderer $this
+ * @var \Omeka\Api\Representation\MediaRepresentation $media
+ * @var array $options
+ */
+
+$escapeAttr = $this->plugin('escapeHtmlAttr');
+
+$source = $media->originalUrl();
+?>
+
+<object height="100%" width="100%" <?= $options['attributes'] ?> data="<?= $escapeAttr($source) ?>" type="application/pdf">
+    <iframe height="100%" width="100%" <?= $options['attributes'] ?> src="<?= $escapeAttr($source) ?>"></iframe>
+</object>

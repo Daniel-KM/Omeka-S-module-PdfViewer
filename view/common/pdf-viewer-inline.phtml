@@ -11,29 +11,31 @@
 /**
  * @var \Zend\View\Renderer\PhpRenderer $this
  * @var \Omeka\Api\Representation\MediaRepresentation $media
- * @var string $attributes
- * @var string $style
+ * @var array $options
  */
 
 $translate = $this->plugin('translate');
-// $this->headMeta()->appendName('google', 'notranslate');
-$this->headMeta()->appendHttpEquiv('X-UA-Compatible', 'IE=edge');
+$assetUrl = $this->plugin('assetUrl');
+
+$this->headMeta()
+    ->appendName('google', 'notranslate')
+    ->appendHttpEquiv('X-UA-Compatible', 'IE=edge');
 $this->headLink()->appendStylesheet($this->assetUrl('vendor/pdf.js/web/viewer-inline.css', 'PdfViewer'));
 // <!-- This snippet is used in production (included from viewer.html) -->
-$this->headLink(['rel' => 'resource', 'type' => 'application/l10n', 'href' => $this->assetUrl('vendor/pdf.js/web/locale/locale.properties', 'PdfViewer')]);
+$this->headLink(['rel' => 'resource', 'type' => 'application/l10n', 'href' => $assetUrl('vendor/pdf.js/web/locale/locale.properties', 'PdfViewer')]);
 
-$this->headScript()->appendScript(
+$this->headScript()
+    ->appendScript(
     'var basePath = ' . json_encode($this->basePath(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';
 var documentUrl = ' . json_encode($media->originalUrl(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';'
-);
-
-$this->headScript()->appendFile($this->assetUrl('vendor/pdf.js/build/pdf.min.js', 'PdfViewer'));
-$this->headScript()->appendFile($this->assetUrl('vendor/pdf.js/web/viewer-inline.js', 'PdfViewer'));
+    )
+    ->appendFile($assetUrl('vendor/pdf.js/build/pdf.min.js', 'PdfViewer'))
+    ->appendFile($assetUrl('vendor/pdf.js/web/viewer-inline.js', 'PdfViewer'));
 
 // Fix some issues to avoid mix of styles of the pages and styles of the pdf.
 $this->headStyle()->captureStart(); ?>
-.pdfjs { background-color: #404040; background-image: url(<?php echo $this->assetUrl('vendor/pdf.js/web/images/texture.png', 'PdfViewer'); ?>); font: message-box; outline: none; overflow: hidden; }
-.pdfjs { width: 100%; <?php echo $style; ?> }
+.pdfjs { background-color: #404040; background-image: url(<?= $assetUrl('vendor/pdf.js/web/images/texture.png', 'PdfViewer') ?>); font: message-box; outline: none; overflow: hidden; }
+.pdfjs { width: 100%; height: 600px; height: 70vh; }
 @media print {
   .pdfjs { background: transparent none; }
   /* Rules for browsers that support PDF.js printing */
@@ -63,7 +65,7 @@ Adobe CMap resources are covered by their own copyright but the same license:
 
 See https://github.com/adobe-type-tools/cmap-resources
 -->
-<div class="pdfjs-html" dir="ltr" mozdisallowselectionprint <?php echo $attributes; ?>>
+<div class="pdfjs-html" dir="ltr" mozdisallowselectionprint="mozdisallowselectionprint" <?= $options['$attributes'] ?>>
   <div tabindex="1" class="loadingInProgress pdfjs">
     <div id="outerContainer">
 
@@ -416,9 +418,8 @@ See https://github.com/adobe-type-tools/cmap-resources
 </div>
 <noscript>
   <p>
-    <?php echo $this->escapeHtml($translate('This browser does not support PDF.')); ?>
-    <?php echo sprintf($translate('You may %sdownload it%s to view it offline.'),
-        '<a href="' . $media->originalUrl() . '">', '</a>'); ?>
-    <img src="<?php echo $media->thumbnailUrl('large'); ?>" height="600px" />
+    <?= $this->escapeHtml($translate('This browser does not support PDF.')) ?>
+    <?= sprintf($translate('You may %sdownload it%s to view it offline.'), '<a href="' . $media->originalUrl() . '">', '</a>') ?>
+    <img src="<?= $media->thumbnailUrl('large') ?>" height="600px" />
   </p>
 </noscript>

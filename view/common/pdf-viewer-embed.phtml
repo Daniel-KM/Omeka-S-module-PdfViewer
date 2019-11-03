@@ -8,8 +8,6 @@
 $escapeAttr = $this->plugin('escapeHtmlAttr');
 
 $source = $media->originalUrl();
-
-// No fallback for HTML5.
 ?>
 
-<iframe height="100%" width="100%" <?= $options['attributes'] ?> src="<?= $escapeAttr($source) ?>"></iframe>
+<embed height="100%" width="100%" <?= $options['attributes'] ?> src="<?= $escapeAttr($source) ?>" type="application/pdf" />

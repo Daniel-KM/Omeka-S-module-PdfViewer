@@ -18,7 +18,7 @@ return [
     ],
     'form_elements' => [
         'invokables' => [
-            Form\SettingsFieldset::class => Form\SettingsFieldset::class,
+            Form\SiteSettingsFieldset::class => Form\SiteSettingsFieldset::class,
         ],
     ],
     'translator' => [
@@ -32,13 +32,8 @@ return [
         ],
     ],
     'pdfviewer' => [
-        'settings' => [
-            'pdfviewer_mode' => 'object',
-            'pdfviewer_style' => 'height: 600px; height: 70vh;',
-        ],
         'site_settings' => [
-            'pdfviewer_mode' => 'object',
-            'pdfviewer_style' => 'height: 600px; height: 70vh;',
+            'pdfviewer_template' => 'common/pdf-viewer',
         ],
     ],
 ];
