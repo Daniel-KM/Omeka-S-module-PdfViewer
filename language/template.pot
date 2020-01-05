@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-04 00:00+0100\n"
+"POT-Creation-Date: 2020-01-06 00:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Module.php:58
-msgid "The Mozilla pdf.js library should be installed."
+#: Module.php:59
+#, php-format
+msgid "The library \"%s\" should be installed."
 msgstr ""
 
-#: Module.php:59
+#: Module.php:62
 msgid "See module’s installation documentation."
 msgstr ""
 
