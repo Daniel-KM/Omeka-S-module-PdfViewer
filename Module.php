@@ -5,7 +5,7 @@
  * @license http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.txt
  * @copyright Daniel Berthereau, 2017-2019
  *
- * Copyright 2017-2019 Daniel Berthereau
+ * Copyright 2017-2020 Daniel Berthereau
  *
  * This software is governed by the CeCILL license under French law and abiding
  * by the rules of distribution of free software. You can use, modify and/or
@@ -55,8 +55,11 @@ class Module extends AbstractModule
             $services = $this->getServiceLocator();
             $t = $services->get('MvcTranslator');
             throw new ModuleCannotInstallException(
-                $t->translate('The Mozilla pdf.js library should be installed.') // @translate
-                    . ' ' . $t->translate('See module’s installation documentation.')); // @translate
+                sprintf(
+                    $t->translate('The library "%s" should be installed.'), // @translate
+                    'Mozilla pdf.js'
+                ) . ' '
+                . $t->translate('See module’s installation documentation.')); // @translate
         }
     }
 
