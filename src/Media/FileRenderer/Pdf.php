@@ -23,8 +23,6 @@ class Pdf implements RendererInterface
     /**
      * Render a pdf via the Mozilla library pdf.js.
      *
-     * @todo Factorize with the view helper.
-     *
      * @param PhpRenderer $view,
      * @param MediaRepresentation $media
      * @param array $options These options are managed for sites:
@@ -34,9 +32,7 @@ class Pdf implements RendererInterface
      */
     public function render(PhpRenderer $view, MediaRepresentation $media, array $options = [])
     {
-        // Omeka 1.2.0 doesn't support $view->status().
-        $isPublic = $view->params()->fromRoute('__SITE__');
-        if ($isPublic) {
+        if ($view->status()->isSiteRequest()) {
             $siteSetting = $view->plugin('siteSetting');
             $template = isset($options['template'])
                 ? $options['template']
@@ -51,7 +47,7 @@ class Pdf implements RendererInterface
 
         unset($options['template']);
         return $view->partial($template, [
-            'resource' => $media,
+            'media' => $media,
             'options' => $options,
         ]);
     }
