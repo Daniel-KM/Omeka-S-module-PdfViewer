@@ -49,7 +49,9 @@ const hack_pdfviewer_pdfjs = function (done) {
         .pipe(rename('viewer-inline.js'))
         .pipe(sourcemaps.init())
         .pipe(replace("value: 'compressed.tracemonkey-pldi-09.pdf',", 'value: documentUrl,'))
+        .pipe(replace('value: "compressed.tracemonkey-pldi-09.pdf",', 'value: documentUrl,'))
         .pipe(replace("value: '../build/pdf.worker.js',", "value: '',"))
+        .pipe(replace('value: "../build/pdf.worker.js",', "value: '',"))
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('asset/vendor/pdf.js/web/'))
         .on('end', done);
