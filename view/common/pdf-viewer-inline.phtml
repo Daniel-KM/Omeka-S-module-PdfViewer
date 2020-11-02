@@ -29,8 +29,8 @@ $this->headScript()
     'var basePath = ' . json_encode($this->basePath(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';
 var documentUrl = ' . json_encode($media->originalUrl(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';'
     )
-    ->appendFile($assetUrl('vendor/pdf.js/build/pdf.min.js', 'PdfViewer'))
-    ->appendFile($assetUrl('vendor/pdf.js/web/viewer-inline.js', 'PdfViewer'));
+    ->appendFile($assetUrl('vendor/pdf.js/build/pdf.min.js', 'PdfViewer'), 'text/javascript', ['defer' => 'defer'])
+    ->appendFile($assetUrl('vendor/pdf.js/web/viewer-inline.js', 'PdfViewer'), 'text/javascript', ['defer' => 'defer']);
 
 // Fix some issues to avoid mix of styles of the pages and styles of the pdf.
 $this->headStyle()->captureStart(); ?>
