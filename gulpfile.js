@@ -13,7 +13,7 @@ gulp.task('clean', function(done) {
 
 gulp.task('sync', gulp.series([
     function (next) {
-        gulp.src(['node_modules/pdf.js/build/generic/**'])
+        gulp.src(['node_modules/pdfjs-dist/build/**'])
         .pipe(gulp.dest('asset/vendor/pdf.js/'))
         .on('end', next);
     },
@@ -23,8 +23,8 @@ gulp.task('sync', gulp.series([
     },
     function (next) {
         gulp.src([
-            'node_modules/pdf.js/build/dist/build/pdf.min.js',
-            'node_modules/pdf.js/build/dist/build/pdf.worker.min.js'
+            'node_modules/pdfjs-dist/build/pdf.min.js',
+            'node_modules/pdfjs-dist/build/pdf.worker.min.js'
         ])
         .pipe(gulp.dest('asset/vendor/pdf.js/build/'))
         .on('end', next);
@@ -32,7 +32,7 @@ gulp.task('sync', gulp.series([
 );
 
 const hack_pdfviewer_pdfjs = function (done) {
-    gulp.src(['node_modules/pdf.js/build/generic/web/viewer.css'])
+    gulp.src(['node_modules/pdfjs-dist/web/pdf_viewer.css'])
         .pipe(rename('viewer-inline.css'))
         .pipe(sourcemaps.init())
         .pipe(replace('html \{', '.pdfjs-html {'))
@@ -45,7 +45,7 @@ const hack_pdfviewer_pdfjs = function (done) {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('asset/vendor/pdf.js/web'));
 
-    gulp.src(['asset/vendor/pdf.js/web/viewer.js'])
+    gulp.src(['node_modules/pdfjs-dist/web/pdf_viewer.js'])
         .pipe(rename('viewer-inline.js'))
         .pipe(sourcemaps.init())
         .pipe(replace("value: 'compressed.tracemonkey-pldi-09.pdf',", 'value: documentUrl,'))

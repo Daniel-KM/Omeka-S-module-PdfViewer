@@ -33,6 +33,6 @@
     "gulp-string-replace": "^0.4.0"
   },
   "dependencies": {
-    "pdf.js": "git+https://github.com/mozilla/pdf.js.git"
+    "pdfjs-dist": "^2.5.207"
   }
 }
