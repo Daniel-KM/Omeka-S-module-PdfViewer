@@ -1,6 +1,9 @@
 Pdf Viewer (module for Omeka S)
 ===============================
 
+> __New versions of this module and support for Omeka S version 3.0 and above
+> are available on [GitLab], which seems to respect users and privacy better.__
+
 [Pdf Viewer] is a module for [Omeka S] that allows to display pdf files
 with the browser reader or via the customizable internal reader, the same Mozilla
 library [`pdf.js`], at the choice of the admin and site admins.
@@ -78,7 +81,7 @@ See online issues on the [module issues] page on GitHub.
 License
 -------
 
-This module is published under the [CeCILL v2.1] licence, compatible with
+This module is published under the [CeCILL v2.1] license, compatible with
 [GNU/GPL] and approved by [FSF] and [OSI].
 
 This software is governed by the CeCILL license under French law and abiding by
@@ -130,4 +133,5 @@ Module Pdf Viewer for Omeka S:
 [FSF]: https://www.fsf.org
 [OSI]: http://opensource.org
 [Apache]: https://github.com/mozilla/pdf.js/blob/master/LICENSE
+[GitLab]: https://gitlab.com/Daniel-KM
 [Daniel-KM]: https://github.com/Daniel-KM "Daniel Berthereau"
