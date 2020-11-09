@@ -75,7 +75,7 @@ your archives regularly so you can roll back if needed.
 Troubleshooting
 ---------------
 
-See online issues on the [module issues] page on GitHub.
+See online issues on the [module issues] page on GitLab.
 
 
 License
@@ -119,19 +119,19 @@ Javascript library [`pdf.js`]:
 
 Module Pdf Viewer for Omeka S:
 
-* Copyright Daniel Berthereau, 2017-2020 (see [Daniel-KM] on GitHub)
+* Copyright Daniel Berthereau, 2017-2020 (see [Daniel-KM] on GitLab)
 
 
-[Pdf Viewer]: https://github.com/Daniel-KM/Omeka-S-module-PdfViewer
+[Pdf Viewer]: https://gitlab.com/Daniel-KM/Omeka-S-module-PdfViewer
 [Omeka S]: https://omeka.org/s
 [`pdf.js`]: https://mozilla.github.io/pdf.js
 [installing a module]: http://dev.omeka.org/docs/s/user-manual/modules/#installing-modules
-[`PdfViewer.zip`]: https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/releases
-[module issues]: https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/issues
+[`PdfViewer.zip`]: https://gitlab.com/Daniel-KM/Omeka-S-module-PdfViewer/-/releases
+[module issues]: https://gitlab.com/Daniel-KM/Omeka-S-module-PdfViewer/-/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
 [GNU/GPL]: https://www.gnu.org/licenses/gpl-3.0.html
 [FSF]: https://www.fsf.org
 [OSI]: http://opensource.org
 [Apache]: https://github.com/mozilla/pdf.js/blob/master/LICENSE
 [GitLab]: https://gitlab.com/Daniel-KM
-[Daniel-KM]: https://github.com/Daniel-KM "Daniel Berthereau"
+[Daniel-KM]: https://gitlab.com/Daniel-KM "Daniel Berthereau"
