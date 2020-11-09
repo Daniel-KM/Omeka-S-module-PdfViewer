@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 namespace PdfViewer\Media\FileRenderer;
 
+use Laminas\View\Renderer\PhpRenderer;
 use Omeka\Api\Representation\MediaRepresentation;
 use Omeka\Media\FileRenderer\RendererInterface;
-use Laminas\View\Renderer\PhpRenderer;
 
 class Pdf implements RendererInterface
 {
@@ -34,12 +34,10 @@ class Pdf implements RendererInterface
     {
         if ($view->status()->isSiteRequest()) {
             $siteSetting = $view->plugin('siteSetting');
-            $template = isset($options['template'])
-                ? $options['template']
-                : $siteSetting('pdfviewer_template', $this->defaultOptions['template']);
-            $options['attributes'] = isset($options['attributes'])
-                ? $options['attributes']
-                : $this->defaultOptions['attributes'];
+            $template = $options['template']
+                ?? $siteSetting('pdfviewer_template', $this->defaultOptions['template']);
+            $options['attributes'] = $options['attributes']
+                ?? $this->defaultOptions['attributes'];
         } else {
             $template = $this->defaultOptions['template'];
             $options['attributes'] = $this->defaultOptions['attributes'];

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * @author Daniel Berthereau
@@ -40,15 +40,15 @@ if (!class_exists(\Generic\AbstractModule::class)) {
 }
 
 use Generic\AbstractModule;
-use Omeka\Module\Exception\ModuleCannotInstallException;
 use Laminas\EventManager\Event;
 use Laminas\EventManager\SharedEventManagerInterface;
+use Omeka\Module\Exception\ModuleCannotInstallException;
 
 class Module extends AbstractModule
 {
     const NAMESPACE = __NAMESPACE__;
 
-    protected function preInstall()
+    protected function preInstall(): void
     {
         $js = __DIR__ . '/asset/vendor/pdf.js/build/pdf.js';
         if (!file_exists($js)) {
@@ -63,7 +63,7 @@ class Module extends AbstractModule
         }
     }
 
-    public function attachListeners(SharedEventManagerInterface $sharedEventManager)
+    public function attachListeners(SharedEventManagerInterface $sharedEventManager): void
     {
         $sharedEventManager->attach(
             \Omeka\Form\SiteSettingsForm::class,
@@ -77,7 +77,7 @@ class Module extends AbstractModule
         );
     }
 
-    public function handleSiteSettingsFilters(Event $event)
+    public function handleSiteSettingsFilters(Event $event): void
     {
         $inputFilter = $event->getParam('inputFilter');
         $inputFilter->get('pdfviewer')

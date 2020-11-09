@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace PdfViewer\Form;
 
 use Laminas\Form\Element;
@@ -8,7 +8,7 @@ class SiteSettingsFieldset extends Fieldset
 {
     protected $label = 'Pdf Viewer'; // @translate
 
-    public function init()
+    public function init(): void
     {
         $this
             ->add([
