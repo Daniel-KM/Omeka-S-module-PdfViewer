@@ -34,10 +34,8 @@ class Pdf implements RendererInterface
     {
         if ($view->status()->isSiteRequest()) {
             $siteSetting = $view->plugin('siteSetting');
-            $template = $options['template']
-                ?? $siteSetting('pdfviewer_template', $this->defaultOptions['template']);
-            $options['attributes'] = $options['attributes']
-                ?? $this->defaultOptions['attributes'];
+            $template = $options['template'] ?? $siteSetting('pdfviewer_template', $this->defaultOptions['template']);
+            $options['attributes'] = $options['attributes'] ?? $this->defaultOptions['attributes'];
         } else {
             $template = $this->defaultOptions['template'];
             $options['attributes'] = $this->defaultOptions['attributes'];
