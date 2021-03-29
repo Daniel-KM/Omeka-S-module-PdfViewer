@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
+
 namespace PdfViewer\Media\FileRenderer;
 
 use Laminas\View\Renderer\PhpRenderer;
 use Omeka\Api\Representation\MediaRepresentation;
 use Omeka\Media\FileRenderer\RendererInterface;
 
-class Pdf implements RendererInterface
+class PdfRenderer implements RendererInterface
 {
     /**
      * The default partial view script.

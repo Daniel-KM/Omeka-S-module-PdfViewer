@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace PdfViewer;
 
 return [
@@ -9,11 +10,10 @@ return [
     ],
     'file_renderers' => [
         'invokables' => [
-            'pdfViewer' => Media\FileRenderer\Pdf::class,
+            'pdf' => Media\FileRenderer\PdfRenderer::class,
         ],
         'aliases' => [
-            'application/pdf' => 'pdfViewer',
-            'pdf' => 'pdfViewer',
+            'application/pdf' => 'pdf',
         ],
     ],
     'form_elements' => [
