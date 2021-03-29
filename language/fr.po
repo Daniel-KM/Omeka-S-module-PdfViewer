@@ -3,42 +3,42 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-03-29 00:00+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2021-03-29 00:00+0000\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Daniel Berthereau <Daniel.fr@Berthereau.net>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: Module.php:59
 #, php-format
 msgid "The library \"%s\" should be installed."
-msgstr ""
+msgstr "La bibliothèque \"%s\" doit être installée."
 
 #: Module.php:62
 msgid "See module’s installation documentation."
-msgstr ""
+msgstr "Consulter la documentation d’installation du module."
 
 #: src/Generic/AbstractModule.php:66
 #, php-format
 msgid "This module requires the module \"%s\"."
-msgstr ""
+msgstr "Ce module requiert le module \"%s\"."
 
 #: src/Generic/AbstractModule.php:73
 #, php-format
 msgid "This module requires modules \"%s\"."
-msgstr ""
+msgstr "Ce module requiert les modules \"%s\"."
 
 #: src/Generic/AbstractModule.php:80
 msgid "This module has resources that cannot be installed."
-msgstr ""
+msgstr "Ce module a des ressource qui ne peuvent pas être installées."
 
 #: src/Generic/AbstractModule.php:707
 #, php-format
@@ -46,52 +46,56 @@ msgid ""
 "The module \"%s\" was automatically deactivated because the dependencies are "
 "unavailable."
 msgstr ""
+"Le module \"%s\" a été automatiquement désactivé car ses dépendances ne sont "
+"plus disponibles."
 
 #: view/common/pdf-viewer-inline.phtml:427
 #: view/common/pdf-viewer-object.phtml:16
 msgid "This browser does not support PDF."
-msgstr ""
+msgstr "Le navigateur ne permet pas d'afficher les pdf."
 
 #: view/common/pdf-viewer-inline.phtml:428
 #: view/common/pdf-viewer-object.phtml:17
 #, php-format
 msgid "You may %sdownload it%s to view it offline."
-msgstr ""
+msgstr "Vous pouvez %sle télécharger %s pour le lire hors ligne."
 
 #: src/Form/SiteSettingsFieldset.php:9
 msgid "Pdf Viewer"
-msgstr ""
+msgstr "Pdf Viewer"
 
 #: src/Form/SiteSettingsFieldset.php:18
 msgid "Integration mode"
-msgstr ""
+msgstr "Mode d’intégration"
 
 #: src/Form/SiteSettingsFieldset.php:19
 msgid ""
 "According to the needed compatibility level, the pdf viewer can be embedded "
 "in multiple ways."
 msgstr ""
+"En fonction du niveau de compatibilité souhaité, la visionneuse pdf peut "
+"être intégrée de plusieurs façons."
 
 #: src/Form/SiteSettingsFieldset.php:21
 msgid "Iframe (most common)"
-msgstr ""
+msgstr "Iframe (le plus courant)"
 
 #: src/Form/SiteSettingsFieldset.php:22
 msgid "Inline (easily customizable)"
-msgstr ""
+msgstr "En ligne (facile à personnaliser)"
 
 #: src/Form/SiteSettingsFieldset.php:23
 msgid "Object"
-msgstr ""
+msgstr "Objet"
 
 #: src/Form/SiteSettingsFieldset.php:24
 msgid "Embed"
-msgstr ""
+msgstr "Embed"
 
 #: src/Form/SiteSettingsFieldset.php:25
 msgid "Object + iframe (max compatibility)"
-msgstr ""
+msgstr "Objet + iframe (max compatibilité)"
 
 #: src/Form/SiteSettingsFieldset.php:26
 msgid "Custom (via theme)"
-msgstr ""
+msgstr "Personnalisée (via le thème)"
