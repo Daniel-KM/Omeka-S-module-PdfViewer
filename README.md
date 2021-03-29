@@ -2,11 +2,12 @@ Pdf Viewer (module for Omeka S)
 ===============================
 
 > __New versions of this module and support for Omeka S version 3.0 and above
-> are available on [GitLab], which seems to respect users and privacy better.__
+> are available on [GitLab], which seems to respect users and privacy better
+> than the previous repository.__
 
 [Pdf Viewer] is a module for [Omeka S] that allows to display pdf files
 with the browser reader or via the customizable internal reader, the same Mozilla
-library [`pdf.js`], at the choice of the admin and site admins.
+library [pdf.js], at the choice of the admin and site admins.
 
 
 Installation
@@ -29,9 +30,35 @@ If the module was installed from the source, rename the name of the folder of
 the module to `PdfViewer`, and go to the root module, and run:
 
 ```sh
-npm install
-gulp
+composer install --no-dev
 ```
+
+The assets are a slightly modified version of the generic viewer. They can be
+rebuild if needed with the script "build.php", that is automatically run from
+composer during install.
+
+```sh
+npm install
+cd node_modules/pdf.js
+npm install
+gulp dist
+# The package version for composer contains the standard minified version from
+# the directory "build" and the "generic" viewer.
+cd ../..
+rm -rf /tmp/pdf.js
+cp -r node_modules/pdf.js/build/generic/ /tmp/pdf.js/
+rm /tmp/pdf.js/web/compressed.tracemonkey-pldi-09.pdf
+cp node_modules/pdf.js/build/dist/build/pdf.min.js /tmp/pdf.js/build/
+cp node_modules/pdf.js/build/dist/build/pdf.worker.min.js /tmp/pdf.js/build/
+rm -rf asset/vendor/pdf.js
+cp -r /tmp/pdf.js asset/vendor
+php -f data/scripts/build.php
+# For release.
+tar czf /tmp/pdf.js.tar.gz /tmp/pdf.js
+```
+
+In some cases, when using an old version of pdf.js, the argument `--legacy-peer-deps`
+should be added to npm.
 
 
 Config
@@ -100,11 +127,11 @@ Copyright
 
 Javascript library [pdf.js]:
 
-* Copyright Mozilla, 2011-2020
+* Copyright Mozilla, 2011-2021
 
 Module Pdf Viewer for Omeka S:
 
-* Copyright Daniel Berthereau, 2017-2020 (see [Daniel-KM] on GitLab)
+* Copyright Daniel Berthereau, 2017-2021 (see [Daniel-KM] on GitLab)
 
 
 [Pdf Viewer]: https://gitlab.com/Daniel-KM/Omeka-S-module-PdfViewer
