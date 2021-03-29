@@ -25,14 +25,7 @@
     "viewer",
     "pdf"
   ],
-  "devDependencies": {
-    "del": "^3.0.0",
-    "gulp": "^4.0.2",
-    "gulp-rename": "^1.4.0",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-string-replace": "^0.4.0"
-  },
   "dependencies": {
-    "pdfjs-dist": "^2.5.207"
+    "pdf.js": "git+https://github.com/mozilla/pdf.js.git"
   }
 }

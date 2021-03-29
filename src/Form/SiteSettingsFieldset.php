@@ -16,7 +16,7 @@ class SiteSettingsFieldset extends Fieldset
                 'type' => Element\Select::class,
                 'options' => [
                     'label' => 'Integration mode', // @translate
-                    'info' => 'According to the needed compatibility level, the pdf viewer can be embedded in multiple ways. These options are used in the admin board.', // @translate
+                    'info' => 'According to the needed compatibility level, the pdf viewer can be embedded in multiple ways.', // @translate
                     'value_options' => [
                         'common/pdf-viewer' => 'Iframe (most common)', // @translate
                         'common/pdf-viewer-inline' => 'Inline (easily customizable)', // @translate

@@ -20,9 +20,47 @@
         "viewer",
         "pdf"
     ],
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "mozilla/pdfjs",
+                "version": "2.7.570",
+                "source": {
+                    "url": "https://github.com/mozilla/pdf.js",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "dist": {
+                    "type": "tar",
+                    "url": "https://github.com/Daniel-KM/Omeka-S-module-PdfViewer/releases/download/3.3.4.2/pdf.js.tar.gz",
+                    "reference": "v2.7.570"
+                }
+            }
+        }
+    ],
+    "require": {
+        "slowprog/composer-copy-file": "~0.3",
+        "mozilla/pdfjs": "^2.7.570"
+    },
     "autoload": {
         "psr-4": {
             "PdfViewer\\": "src/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "SlowProg\\CopyFile\\ScriptHandler::copy",
+            "@php -f 'data/scripts/build.php'"
+        ],
+        "post-update-cmd": [
+            "SlowProg\\CopyFile\\ScriptHandler::copy",
+            "@php -f 'data/scripts/build.php'"
+        ]
+    },
+    "extra": {
+        "copy-file": {
+            "vendor/mozilla/pdfjs/": "asset/vendor/pdf.js/"
         }
     }
 }

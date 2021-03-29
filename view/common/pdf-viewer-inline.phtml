@@ -1,9 +1,9 @@
 <?php
-// This file is the original viewer.html sample, with some changes:
-// - layout, css and script are set via Zend,
+// This file is the original web/viewer.html sample, with some changes:
+// - layout, css and script are set via Laminas,
 // - some styles are reset,
 // - the height is set at 600px/70vh by default (via config style),
-// - the css file viewer-inline is updated via gulp to add ".pdfjs" before all rules,
+// - the css file viewer is updated via gulp to add ".pdfjs" before some rules,
 // - the PDF file is set via a variable instead of a url query parameter,
 // - a noscript element is added at the end,
 // By this way, it can be overridden and customized via the theme, if needed.
@@ -18,10 +18,16 @@ $translate = $this->plugin('translate');
 $assetUrl = $this->plugin('assetUrl');
 
 $this->headMeta()
+    // TODO Append meta comment for chrome/mozilla (here and some other ones).
+    // <!--#if GENERIC || CHROME-->
     ->appendName('google', 'notranslate')
+    // <!--#endif-->
+    // <!--#if GENERIC-->
     ->appendHttpEquiv('X-UA-Compatible', 'IE=edge');
-$this->headLink()->appendStylesheet($this->assetUrl('vendor/pdf.js/web/viewer-inline.css', 'PdfViewer'));
-// <!-- This snippet is used in production (included from viewer.html) -->
+    // <!--#endif-->
+$this->headLink()
+    ->appendStylesheet($assetUrl('vendor/pdf.js/web/viewer.css', 'PdfViewer'));
+    // <!-- This snippet is used in production (included from viewer.html) -->
 $this->headLink(['rel' => 'resource', 'type' => 'application/l10n', 'href' => $assetUrl('vendor/pdf.js/web/locale/locale.properties', 'PdfViewer')]);
 
 $this->headScript()
@@ -30,7 +36,7 @@ $this->headScript()
 var documentUrl = ' . json_encode($media->originalUrl(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ';'
     )
     ->appendFile($assetUrl('vendor/pdf.js/build/pdf.min.js', 'PdfViewer'), 'text/javascript', ['defer' => 'defer'])
-    ->appendFile($assetUrl('vendor/pdf.js/web/viewer-inline.js', 'PdfViewer'), 'text/javascript', ['defer' => 'defer']);
+    ->appendFile($assetUrl('vendor/pdf.js/web/viewer.js', 'PdfViewer'), 'text/javascript', ['defer' => 'defer']);
 
 // Fix some issues to avoid mix of styles of the pages and styles of the pdf.
 $this->headStyle()->captureStart(); ?>
