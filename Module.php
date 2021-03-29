@@ -50,7 +50,7 @@ class Module extends AbstractModule
 
     protected function preInstall(): void
     {
-        $js = __DIR__ . '/asset/vendor/pdf.js/build/pdf.js';
+        $js = __DIR__ . '/asset/vendor/pdf.js/build/pdf.min.js';
         if (!file_exists($js)) {
             $services = $this->getServiceLocator();
             $t = $services->get('MvcTranslator');
