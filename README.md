@@ -137,7 +137,7 @@ Module Pdf Viewer for Omeka S:
 [Pdf Viewer]: https://gitlab.com/Daniel-KM/Omeka-S-module-PdfViewer
 [Omeka S]: https://omeka.org/s
 [pdf.js]: https://mozilla.github.io/pdf.js
-[installing a module]: http://dev.omeka.org/docs/s/user-manual/modules/#installing-modules
+[Installing a module]: https://omeka.org/s/docs/user-manual/modules/#installing-modules
 [PdfViewer.zip]: https://gitlab.com/Daniel-KM/Omeka-S-module-PdfViewer/-/releases
 [module issues]: https://gitlab.com/Daniel-KM/Omeka-S-module-PdfViewer/-/issues
 [CeCILL v2.1]: https://www.cecill.info/licences/Licence_CeCILL_V2.1-en.html
