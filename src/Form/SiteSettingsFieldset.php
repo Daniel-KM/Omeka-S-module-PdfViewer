@@ -11,6 +11,7 @@ class SiteSettingsFieldset extends Fieldset
     public function init(): void
     {
         $this
+            ->setAttribute('id', 'pdf-viewer')
             ->add([
                 'name' => 'pdfviewer_template',
                 'type' => Element\Select::class,
